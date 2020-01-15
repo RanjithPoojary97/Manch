@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Price SetUp</title>
+    <link rel="shortcut icon" href="esign/images/favicon.png" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+
+    <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js"></script>
+    <script src="/bower_components/jquery.cookie/jquery.cookie.js"></script>
+    <style>
+        .usrName {
+            font-size: 15px;
+            color: #495057;
+            font-weight: bold;
+            float: right;
+            text-transform: uppercase;
+        }
+
+        .usrEmail {
+            font-size: 15px;
+            color: #495057;
+            float: right;
+        }
+
+        .js-hrDetails {
+            margin: 0px;
+            padding: 7px 4%;
+            display: grid;
+            margin-left: 400px;
+        }
+
+        a:hover {
+            color: tomato;
+        }
+
+        th {
+            background-color: #3971a9;
+            color: white;
+        }
+
+        select {
+            background: #e6fffa;
+        }
+
+        /*#displayTotal
+{display:none;}*/
+        #pid,
+        #pid1,
+        #pid2,
+        #pid3,
+        #pid4 {
+            background-color: #F8F8F8;
+            font-family: sans-serif;
+            font-size: 12px;
+            height: 25px;
+        }
+
+        .form-control-sm {
+            height: 25px !important;
+        }
+
+        .page-link {
+            line-height: 0.9 !important;
+        }
+    </style>
+    <!-- <script>
+
+        $(document).ready(function () {
+            $('#featTbl').DataTable();
+        });
+
+    </script> -->
+
+    <script>
+
+        var sm = "";
+        var ht = [];
+        var arr = [];
+        $(document).ready(function () {
+            var mai = JSON.parse($.cookie('abhi'))[0].payLoad.authToken;
+            var nam = JSON.parse($.cookie('abhi'))[0].payLoad.companyName;
+            var ema = JSON.parse($.cookie('abhi'))[0].payLoad.email;
+            console.log(nam + " " + ema);
+            document.getElementById("usrName").innerHTML = nam;
+            document.getElementById("usrEmail").innerHTML = ema;
+            let myheader = {
+                "x-authorization": mai,
+            }
+
+            $.ajax({
+                type: 'GET',
+                url: "/app/admin/company",
+                async: true,
+                crossDomain: true,
+                headers: myheader,
+                success: function (res) {
+                    // console.log(res);
+                    var result = res.payLoad;
+                    res.forEach(function (element) {
+                        if (element.deleted == false) {
+                            $('select#cname1').append('<option  value=' + element.id + '>' + element.companyName + '</option>');
+                        }
+                    });
+                }
+            });
+
+            $.ajax({
+                type: 'POST',
+                url: "app/transact/getFeatures",
+                async: true,
+                crossDomain: true,
+                headers: myheader,
+                success: function (data) {
+                    data.forEach(function (element) {
+
+                        arr.push(element.featureId)
+                        $('tbody#feature').append('<tr><td id="feat1">' + element.featureName + '</td><td id="feat2"><input type="text" id="tb' + element.featureId + '" class="form-control" name="price"  placeholder="Enter Price" style="width: 100px;height:25px;font-size:12px;"></td></tr>');
+                        console.log(arr)
+                    });
+                    var len = arr.length;
+
+                    // $('#featTbl').DataTable({
+                    //  paging: true,
+                    //  searching: true,
+                    //  destroy: true,
+                    //  data: data,
+                    //  columns: [
+                    //      {
+                    //          'data': 'featureId',
+                    //          'render': function (data, type, full, meta) {
+                    //              // console.log(data)
+                    //              return '<input type="text" id="tb' + data + '" class="form-control" name="price"  placeholder="Enter Price" style="width: 100px;height:25px;font-size:12px;">';
+
+                    //          }   
+                    //      },
+
+                    //      {
+                    //          'data': 'featureName',
+                    //          'render': function (data, type, full, meta) {
+
+                    //              return data;
+                    //          }
+                    //      },
+
+
+                    //  ]
+                    // });
+                }
+
+
+            });
+        });
+
+
+        $(document).ready(
+            function () {
+                 var mai = JSON.parse($.cookie('abhi'))[0].payLoad.authToken;
+            var comValues = document.getElementById("cname1").value
+            let myheader = {
+                "x-authorization": mai,
+            }
+
+                // SUBMIT FORM
+                /*$("#formLogin").submit(function(event) {
+                event.preventDefault();
+                ajaxPost();
+                });*/
+
+                $("#btnLogin").click(function (event) {
+                    event.preventDefault();
+                    ajaxPost();
+                });
+
+
+                function ajaxPost() {
+                    // temp(ht);
+                    // console.log("ranjith");
+                    var fn1 = [];
+                    var m;
+                    for (var i = 0; i < arr.length; i++) {
+                        // console.log(arr[i]);
+                        var temp = $('#tb' + arr[i]).val();
+                        if (temp == "") {
+                            m="0";
+                          
+                        }
+                        else {
+                            m = $('#tb' + arr[i]).val()
+                        }
+                        
+                            fn1.push(m);
+                        }
+                        
+                    
+                    console.log(fn1);
+                    console.log(arr);
+
+                    var fn = arr;
+                    var cost = fn1;
+                    console.log(fn);
+                    console.log(cost);
+                    // PREPARE FORM DATA
+                    for (var i = 0; i < arr.length; i++) {
+                        var formData = {
+                            companyId: $('#cname1').val(),
+                            templateId: $('#tname1').val(),
+                            featureId: fn[i],
+                            price: cost[i]
+                        }
+                        console.log(formData);
+                        // DO POST
+                        $.ajax({
+                            type: "POST",
+                            contentType: "application/json",
+                            url: "/app/transact/saveContent",
+                            async: true,
+                            crossDomain: true,
+                            headers: myheader,
+                            data: JSON.stringify(formData),
+                            dataType: 'json',
+                            success: function (result) {
+                                if (result.status == "success") {
+                                    alert("" + result.data.tname + " Post Successfully! ");
+
+                                } else {
+                                    alert("Error!!!" + result.data.tname + " Already Exist ");
+                                }
+                                console.log(result);
+                            },
+                            error: function (e) {
+                                console.log("ERROR: ", e);
+                            }
+                        });
+                    }
+                    alert("Recorded...");
+
+                }
+
+            });
+
+
+        function tempFunction1() {
+            var mai = JSON.parse($.cookie('abhi'))[0].payLoad.authToken;
+            var comValues = document.getElementById("cname1").value
+            let myheader = {
+                "x-authorization": mai,
+            }
+
+            $.ajax({
+                type: 'GET',
+                url: "/app/admin/company" + "/" + comValues + "/template",
+                async: true,
+                crossDomain: true,
+                headers: myheader,
+                success: function (res) {
+                    var result = res.payLoad;
+                    $('select#tname1').empty();
+                    res.forEach(function (element1) {
+                        if (element1.deleted == false) {
+                            $('select#tname1').append('<option  value=' + element1.id + '>' + element1.templateName + '</option>');
+                        }
+                    });
+                }
+            });
+        }
+        function redirecthomeset() {
+            var hiddenElement = document.createElement('a');
+            hiddenElement.href = 'http://localhost/transactionReport.html';
+            hiddenElement.click();
+        }
+
+
+    </script>
+</head>
+
+<body style="background-color: #f5f5f0; ">
+    <div id="postResultDiv" style="text-align:center"></div>
+    <header style="width:100%; height:20%; text-align:center;font-family:sans-serif;font-size: 13px;">
+        <nav class="navbar navbar-expand-sm bg-light navbar-dark">
+            <div class="col-md-8 col-sm-8">
+            <ul class="navbar-nav">
+                <li class="nav-item ">
+                    <a class="nav-link" href="#"><img src="build/images/ManchLogo.png" alt="Logo"
+                            style="width:120px; height:40px;margin-left:20px;" onclick="redirecthomeset()"></a>
+                </li>
+                <li class="nav-item active">
+                    <h7 class="nav-link" href="#"
+                        style="color:#007bff;margin-top:08px;margin-left:30px;font-size: 17px;"><b>Set
+                            Up</b></h7>
+                </li>
+                <li class="nav-item active">
+                    <a class="form-group btn btn-success" href="http://localhost/transactionReport.html"
+                        style="color:#007bff;margin-top:17px;margin-left:30px;background-color: transparent;border-color:#007bff;border-radius: 25px;padding-top:1px;padding-bottom:1px;font-family: sans-serif;font-size: 13px;border-top-width: 2px;border-right-width: 2px;border-bottom-width: 2px;border-left-width: 2px;">Transaction
+                        Report</a>
+                </li>
+
+            </ul>
+            </div>
+            <div class="js-hrDetails text-right col-md-4 col-sm-4 text-right"style="right: 35px;padding: 4px;margin-left: 0px;">
+
+                <span class="usrName" id="usrName"></span>
+                <span class="usrEmail" id="usrEmail"></span>
+            </div>
+        </nav>
+    </header>
+    <section style="margin: 2px;">
+
+        <!-- <div style="background:maroon;text-align:center;" class="btn-lg"> 
+<h3 style="color:white;padding:0px;">Set Up</h3>
+</div> -->
+        <div class="container-fluid" style="display:inline;margin:5px;">
+            <div class="row" style="margin-top: -5px;">
+                <div class="col-md-3" style="padding-left: 37px;padding-top: 15px;top:-39px;">
+                    <div class="row" style="margin-left: -11px;">
+                        <div style="width:250px;"><br>
+                            <!--<a href="" class="float-right">New user?</a>-->
+                            <label for="cname1">Select Company Name</label>
+                            <select
+                                style="height:30px;text-align: center;background-color:#F8F8F8;width:280px;font-family: sans-serif;font-size: 13px;"
+                                class="browser-default custom-select cname1" name="cid" id="cname1" required="required" onchange='tempFunction1()'>
+                                <option value="">Please Select</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-left: -11px;">
+                        <div style="width:250px;"><br>
+                            <label for="tname1">Select Template Name</label>
+                            <select
+                                style="height:30px;text-align: center;background-color:#F8F8F8;width:280px;font-family: sans-serif;font-size: 13px;"
+                                class="browser-default custom-select" name="tname" id="tname1" required="required">
+                                <option value="">Please Select</option>
+                            </select>
+                        </div>
+                    </div><br>
+                    
+                </div>
+
+                <div class="col-md-8">
+                    <label for="fname1">Enter price for features</label>
+                    <!--<script>
+$.getJSON('feature.json', function(data){
+$.each(data, function(i, user){
+console.log(user);
+$('table#fname1').append('<tr form="myForm" > <td form="myForm" id='+user.fid+' name="fid[]" style="color:maroon;">'
++user.features+'</td><td><input form="myForm" id="pid_'+user.fid+'" name="pid[]" type="text" placeholder="Enter Price"></td></tr>');
+});
+});
+</script>-->
+
+                    <table class="table table-striped" id="featTbl" style="width:100%;font-family: sans-serif;font-size: 12px;line-height: 12px;">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Price</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="feature" style="line-height: 12px !important;font-size: 12px !important;">
+                            <!-- <tr style="display: none;">
+                                <td id="feat1"></td>
+                                <td id="feat2"></td>
+                             --><!-- </tr> -->
+                        </tbody>
+                    </table>
+                    <!-- <td style="color:maroon;">Aadhar</td>
+<td><input id="pid" class="form-control" name="price" value="0" type="text" placeholder="Enter Price" style="width: 100px;">
+</td>
+<td><input type="checkbox" id="fid" name="fname" value="1" style="display:none;" checked /></td>
+</tr>
+<tr>
+<td style="color:maroon;">PAN</td>
+<td><input id="pid1" class="form-control" name="price" value="0" type="text" placeholder="Enter Price" style="width: 100px;">
+</td>
+<td><input type="checkbox" id="fid1" name="fname" value="2" style="display:none;" checked /></td>
+</tr>
+<tr>
+<td style="color:maroon;">E-sign</td>
+<td><input id="pid2" class="form-control" name="price" value="0" type="text" placeholder="Enter Price" style="width: 100px;">
+</td>
+<td><input type="checkbox" id="fid2" name="fname" value="3" style="display:none;" checked /></td>
+</tr>
+<tr>
+<td style="color:maroon;">QR-scan</td>
+<td><input id="pid3" class="form-control" name="price" value="0" type="text" placeholder="Enter Price" style="width: 100px;">
+</td>
+<td><input type="checkbox" id="fid3" name="fname" value="4" style="display:none;" checked /></td>
+</tr>
+<tr>
+<td style="color:maroon;">GSTN</td>
+<td><input id="pid4" class="form-control" name="price" value="0" type="text" placeholder="Enter Price" style="width: 100px;">
+</td>
+<td><input type="checkbox" id="fid4" name="fname" value="5" style="display:none;" checked /></td>
+</tr> -->
+
+                    <!--<select class="browser-default custom-select " name="fname1" id="fname1" multiple="multiple"  > </select>-->
+                    <!-- </div> -->
+                    <!-- </div> -->
+
+                    <div style="width:100px;" style="text-align:left">
+                        <input type="button" class="form-group btn btn-success" value="Submit" id="btnLogin"
+                            style="width:100px;color:white;background-color:#3971a9;border-radius: 5px;border:transparent;font-family: sans-serif;font-size: 13px;">
+                    </div>
+                </div>
+            </div>
+    </section><br><br>
+    <!--  <div style="display:inline; float:right;left:850px;position: absolute;">
+    <div id="displayTotal" class="displayTotal" style="width:400px;height:300px;">
+    <label>Company name : <span id='display'></span></label><br>
+    <label>Template name :  <span id='display1'></span></label><br>
+    <label>Pan : <span id='display2'></span></label><br>
+    <label>Aadhar : <span id='display3'></span></label><br>
+    <label>E-sign : <span id='display4'></span></label><br>
+    <label>QR-scan : <span id='display5'></span></label><br>
+    <label>GSTN : <span id='display6'></span></label><br>
+    </div>
+    </div> -->
+    <style>
+        label {
+            color: maroon;
+            font-family: sans-serif;
+            font-size: 13px;
+            /*font-weight: bold;*/
+        }
+
+        td {
+            font-family: sans-serif;
+            font-size: 12px;
+            padding-top: 4px !important;
+            padding-bottom: 4px !important;
+        }
+    </style>
+    <script>
+        /*$(document).ready(function() {
+        $('#fname1').selectpicker();
+        });*/
+    </script>
+
+</body>
+
+</html>

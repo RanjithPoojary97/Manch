@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>MANCH HOME</title>
+    <link rel="shortcut icon" href="esign/images/favicon.png" />
+    <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="esign/js/valSort.js" language="javascript"></script>
+    <script src="/bower_components/jquery.cookie/jquery.cookie.js"></script>
+
+
+    <style>
+        #nav li:hover a {
+            color: red;
+        }
+
+        .container-fluid {
+            overflow: hidden;
+
+        }
+
+
+
+
+        .item-1,
+        .item-2,
+        .item-3 {
+            overflow: hidden;
+            position: absolute;
+            display: block;
+            top: 4em;
+
+            width: 60%;
+
+            font-size: 2em;
+
+            animation-duration: 20s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .item-1 {
+            animation-name: anim-1;
+            margin-bottom: 30px;
+            top: 13px;
+        }
+
+        .item-2 {
+            animation-name: anim-2;
+            margin-bottom: 30px;
+            top: 13px;
+        }
+
+        .item-3 {
+            animation-name: anim-3;
+            margin-bottom: 30px;
+            top: 13px;
+        }
+
+        @keyframes anim-1 {
+
+            0%,
+            8.3% {
+                left: -100%;
+                opacity: 0;
+            }
+
+            8.3%,
+            25% {
+                left: 25%;
+                opacity: 1;
+            }
+
+            33.33%,
+            100% {
+                left: 110%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes anim-2 {
+
+            0%,
+            33.33% {
+                left: -100%;
+                opacity: 0;
+            }
+
+            41.63%,
+            58.29% {
+                left: 25%;
+                opacity: 1;
+            }
+
+            66.66%,
+            100% {
+                left: 110%;
+                opacity: 0;
+            }
+        }
+
+        @keyframes anim-3 {
+
+            0%,
+            66.66% {
+                left: -100%;
+                opacity: 0;
+            }
+
+            74.96%,
+            91.62% {
+                left: 25%;
+                opacity: 1;
+            }
+
+            100% {
+                left: 110%;
+                opacity: 0;
+            }
+        }
+
+
+
+
+
+        /*----------Background----------------------*/
+
+        #bg-purple {
+            color: #fff;
+            background: -webkit-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), -webkit-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
+            /* background: -o-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), -o-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
+    background: -moz-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), -moz-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);*/
+            background: linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
+        }
+
+        #bg-bmw {
+            color: #fff;
+            background: -webkit-linear-gradient(110deg, #EE0405 40%, rgba(0, 0, 0, 0) 30%), -webkit-radial-gradient(farthest-corner at 0% 0%, #2D4046 70%, #B8CAD1 70%);
+            /* background: -o-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), -o-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
+    background: -moz-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), -moz-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);*/
+            background: linear-gradient(110deg, #EE0405 40%, rgba(0, 0, 0, 0) 30%), radial-gradient(farthest-corner at 0% 0%, #2D4046 70%, #B8CAD1 70%);
+        }
+
+        #bg-bmw1 {
+            color: #fff;
+            background: -webkit-linear-gradient(110deg, #FFFDFE 40%, rgba(0, 0, 0, 0) 30%), -webkit-radial-gradient(farthest-corner at 0% 0%, #2D4046 70%, #B8CAD1 70%);
+            /* background: -o-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), -o-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);
+    background: -moz-linear-gradient(110deg, #a60af3 40%, rgba(0, 0, 0, 0) 30%), -moz-radial-gradient(farthest-corner at 0% 0%, #7a00cc 70%, #c03fff 70%);*/
+            background: linear-gradient(110deg, #FFFDFE 40%, rgba(0, 0, 0, 0) 30%), radial-gradient(farthest-corner at 0% 0%, #2D4046 70%, #B8CAD1 70%);
+        }
+
+        #bg-germany {
+            color: #fff;
+            background: -webkit-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -webkit-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+            background: -o-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -o-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+            background: -moz-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -moz-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+            background: linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+        }
+
+        #bg-bmw2 {
+            color: #fff;
+            background: -webkit-linear-gradient(110deg, #EE0405 33%, rgba(0, 0, 0, 0) 33%), -webkit-linear-gradient(110deg, #2D4046 66%, #B8CAD1 66%);
+            background: -o-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -o-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+            background: -moz-linear-gradient(110deg, #000 33%, rgba(0, 0, 0, 0) 33%), -moz-linear-gradient(110deg, #dd0000 66%, #ffc608 66%);
+            background: linear-gradient(110deg, #EE0405 33%, rgba(0, 0, 0, 0) 33%), linear-gradient(110deg, #2D4046 66%, #B8CAD1 66%);
+        }
+
+
+
+
+        /*----------------modal----------------------*/
+
+        .form-elegant .font-small {
+            font-size: 0.8rem;
+        }
+
+        .form-elegant .z-depth-1a {
+            -webkit-box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+            box-shadow: 0 2px 5px 0 rgba(55, 161, 255, 0.26), 0 4px 12px 0 rgba(121, 155, 254, 0.25);
+        }
+
+        .form-elegant .z-depth-1-half,
+        .form-elegant .btn:hover {
+            -webkit-box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+            box-shadow: 0 5px 11px 0 rgba(85, 182, 255, 0.28), 0 4px 15px 0 rgba(36, 133, 255, 0.15);
+        }
+
+        .form-elegant .modal-header {
+            border-bottom: none;
+        }
+
+        .modal-dialog .form-elegant .btn .fab {
+            color: #2196f3 !important;
+        }
+
+        .form-elegant .modal-body,
+        .form-elegant .modal-footer {
+            font-weight: 400;
+        }
+
+        :root {
+            --input-padding-x: 1.5rem;
+            --input-padding-y: .75rem;
+        }
+
+        #Form-email1 {
+            height: 43px !important;
+        }
+
+        #Form-pass1 {
+            height: 43px !important;
+        }
+
+        .modal-body.btn {
+            font-size: 80%;
+            border-radius: 5rem;
+            letter-spacing: .1rem;
+            font-weight: bold;
+            padding: 1rem;
+            transition: all 0.2s;
+        }
+
+
+        .form-label-group {
+            position: relative;
+            margin-bottom: 1rem;
+        }
+
+        .form-label-group input {
+            height: auto;
+
+        }
+
+        .form-label-group>input,
+        .form-label-group>label {
+            padding: var(--input-padding-y) var(--input-padding-x);
+        }
+
+        .form-label-group>label {
+            position: absolute;
+            top: 4px;
+            left: 0px;
+            display: block;
+            width: 100%;
+            margin-bottom: 0;
+            /* Override default `<label>` margin */
+            line-height: 10px;
+            color: #495057;
+            border: 1px solid transparent;
+            border-radius: .25rem;
+            transition: all .1s ease-in-out;
+        }
+
+        .form-label-group input::-webkit-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input:-ms-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::-ms-input-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::-moz-placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input::placeholder {
+            color: transparent;
+        }
+
+        .form-label-group input:not(:placeholder-shown) {
+            padding-top: calc(var(--input-padding-y) + var(--input-padding-y) * (2 / 3));
+            padding-bottom: calc(var(--input-padding-y) / 3);
+        }
+
+        .form-label-group input:not(:placeholder-shown)~label {
+            padding-top: calc(var(--input-padding-y) / 3);
+            padding-bottom: calc(var(--input-padding-y) / 3);
+            font-size: 12px;
+            color: #777;
+        }
+
+
+
+        /*---------END MODAL---------*/
+    </style>
+</head>
+
+<body>
+    <!--  <link rel="stylesheet" type="text/css" href="login_model.css"> -->
+    <header style="width:100%;">
+        <div>
+            <nav class="navbar navbar-expand-sm bg-light navbar-light">
+                <div class="col-md-8 col-sm-8">
+                    <ul class="navbar-nav">
+                        <li class="nav-item ">
+                            <a class="nav-link" href="#"><img src="build/images/ManchLogo.png" alt="Logo"
+                                    style="width:130px; height:40px;margin-left:20px;"></a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#"
+                                style="color:#cc0000;margin-top:10px;margin-left:200px;">Home</a>
+                        </li>
+                       <!--  <li class="nav-item">
+                            <a id="contact" class="nav-link" href="#"
+                                style="color:black;margin-top:10px;margin-left:30px;">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" onmousehover="tomato" href="#"
+                                style="color:black;margin-top:10px;margin-left:30px;">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"
+                                style="color:black;margin-top:10px;margin-left:30px;">Product</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" onmousehover="tomato" href="poc.html"
+                                style="color:black;margin-top:10px;margin-left:30px;">Partner</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" style="color:black;margin-top:10px;margin-left:30px;">FAQ</a>
+                        </li>
+                    </div>
+
+                        
+
+                            <!--<input type="button" value="Login" style="padding-left:15px;color:#cc0000;padding-right:15px;border:1px solid #cc0000;border-radius:10%;background:white"  >-->
+                            <div class="col-md-4 col-sm-4 text-right">
+                            <a href="" class="btn btn-danger " data-target="#elegantModalForm" data-toggle="modal"
+                                style="color:#cc0000;background-color:transparent;border-color:#cc0000;">Login</a>
+                            </div>
+
+                        
+
+                    </ul>
+                
+            </nav>
+        </div>
+    </header>
+    <div class="container-fluid" id="bg-bmw2" style="height: 428px;">
+        <div class="row">
+            <br>
+            <!-- <div class="col-md-12 col-sm-12"> -->
+
+
+            <div class="card" style=" width: 100%;background-color: transparent !important;border-color: transparent;">
+                <div class="card-body" style="width: 100%;height: 150px;">
+                    <!-- <div  style="margin-top: 10px;height: -webkit-fill-available;">  -->
+
+                    <p class="item-1">This is your last chance. After this, there is no turning back.</p>
+
+
+                    <p class="item-2">You take the blue pill - the story ends, you wake up in your bed and believe
+                        whatever you want to believe.</p>
+
+
+                    <p class="item-3">You take the red pill - you stay in Wonderland and I show you how deep the
+                        rabbit-hole goes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+
+    <footer style="font-family:montserrat !important;background:#3a3f3f;color:white;width:100%;">
+        <div style="margin-left:70px;padding: 10px;">
+            <pre style="color: white;font-family:montserrat !important;">
+        <u>Contact</u>
+        MANCH TECHNOLOGIES PRIVATE LTD.
+        # 441 NGEF Layout, Railway Parallel Road,
+        Sadanandnagar, Bangalore – 560 038
+        Karnataka, India
+        <a href="#" color="blue">support@manchtech.com</a></pre>
+        </div>
+    </footer>
+    <!-- The Modal -->
+    <!-- Modal -->
+    <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <!--Content-->
+            <div class="modal-content form-elegant" style="background-color: #F8F8F8;">
+                <!--Header-->
+                <div class="modal-header text-left">
+
+                    <h3 class="modal-title w-100 dark-grey-text font-weight-normal my-3" id="myModalLabel"
+                        style="padding-left: 27px;font-family: Roboto,sans-serif;"><u>Sign in</u></h3>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+                <a style="display: none" id="redirect"></a>
+                <!--Body-->
+                <div class="modal-body mx-4" style="top: -15px;">
+
+                    <div class="form-label-group">
+                        <input type="email" id="Form-email1" class="form-control" placeholder="Enter email"
+                            style="background-color: transparent;">
+                        <label data-error="wrong" data-success="right" for="Form-email1">Enter email</label>
+                    </div>
+
+                    <div class="form-label-group">
+                        <input type="password" id="Form-pass1" class="form-control" placeholder="Enter password"
+                            style="background-color: transparent;">
+                        <label data-error="wrong" data-success="right" for="Form-pass1">Enter password</label>
+
+                        <p class="font-small blue-text d-flex justify-content-end" style="font-size: 13px;">Forgot <a
+                                href="#" class="blue-text ml-1">
+                                Password?</a></p>
+                    </div>
+
+                    <div class="text-center mb-3">
+                        <button class="btn btn-lg btn-primary btn-block text-uppercase" value="Submit"
+                            onclick="loginVal1()">login</button>
+                    </div>
+
+                </div>
+                <!--/.Content-->
+            </div>
+        </div>
+        <!-- Modal -->
+
+</body>
+
+</html>
